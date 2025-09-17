@@ -6,11 +6,11 @@ export default function Board({ squares, onPlay, xIsNext }: BoardProps) {
     if (squares[i]) return;
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
-    onPlay(nextSquares, i);
+    onPlay(nextSquares,i);
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-full">
       {squares.map((value, idx) => (
         <Square
           key={idx}
