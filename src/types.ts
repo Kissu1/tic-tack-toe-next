@@ -9,6 +9,6 @@ export interface SquareProps {
 
 export interface BoardProps {
   squares: BoardState;
+  onPlay: (nextSquares: BoardState, moveIndex: number) => void;
   xIsNext: boolean;
-  onPlay: (nextSquares: BoardState) => void;
 }
