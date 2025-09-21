@@ -1,4 +1,4 @@
-import Square from './Square';
+import Square from './Sq';
 import type { BoardProps } from '../types';
 
 export default function Board({ squares, onPlay, xIsNext }: BoardProps) {
