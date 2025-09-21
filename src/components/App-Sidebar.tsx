@@ -35,9 +35,9 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar className="w-full md:w-60">
       <SidebarHeader>
-        <h2 className="px-2 py-2 font-bold">Tic-Tac-Toe</h2>
+        <h2 className="px-2 py-2 font-bold text-center md:text-left">Tic-Tac-Toe</h2>
       </SidebarHeader>
       
       <SidebarContent>
@@ -60,7 +60,7 @@ export function AppSidebar() {
               <Button 
                 onClick={toggleDarkMode}
                 variant="outline" 
-                className="w-full justify-start"
+                className="w-full justify-center md:justify-start"
               >
                 {isDark ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
                 {isDark ? 'Light Mode':'Dark Mode'}
@@ -70,5 +70,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

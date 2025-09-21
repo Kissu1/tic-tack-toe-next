@@ -11,7 +11,7 @@ export default function Board({ squares, onPlay, xIsNext, winner }: BoardProps &
   }
 
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-full">
+    <div className="grid grid-cols-3 grid-rows-3 gap-1 sm:gap-2 w-full h-full">
       {squares.map((value, idx) => (
         <Square
           key={idx}
