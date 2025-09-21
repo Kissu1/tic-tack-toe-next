@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Board from './GameBoard';
+import Board from './Board';
 import type { BoardState } from '../types';
 import { calculateWinner } from '../utils/calculateWinner';
 
