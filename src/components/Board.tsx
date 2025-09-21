@@ -1,9 +1,10 @@
 import Square from './Sq';
 import type { BoardProps } from '../types';
+import type { Player } from '../types';
 
-export default function Board({ squares, onPlay, xIsNext }: BoardProps) {
+export default function Board({ squares, onPlay, xIsNext, winner }: BoardProps & { winner: Player | null }) {
   function handleClick(i: number) {
-    if (squares[i]) return;
+    if (squares[i] || winner) return;
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
     onPlay(nextSquares,i);

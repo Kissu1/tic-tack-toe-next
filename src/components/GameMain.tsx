@@ -1,13 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Board from './Board';
+import WinnerDialog from './WinnerDialog';
 import type { BoardState } from '../types';
 import { calculateWinner } from '../utils/calculateWinner';
 
 export default function Game() {
   const [history, setHistory] = useState<BoardState[]>([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [showWinnerDialog, setShowWinnerDialog] = useState(false);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
   const winner = calculateWinner(currentSquares);
@@ -16,12 +18,19 @@ export default function Game() {
   const resetGame = () => {
     setHistory([Array(9).fill(null)]);
     setCurrentMove(0);
+    setShowWinnerDialog(false);
   };
 
   // Expose reset function globally for sidebar access
   if (typeof window !== 'undefined') {
     (window as any).resetGame = resetGame;
   }
+
+  useEffect(() => {
+    if (winner) {
+      setShowWinnerDialog(true);
+    }
+  }, [winner]);
 
   function handlePlay(nextSquares: BoardState) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -62,7 +71,7 @@ export default function Game() {
   return (
     <div className="flex flex-col sm:flex-row gap-8 p-4 sm:p-8">
       <div className="border border-border flex items-center justify-center p-4 bg-background">
-        <Board squares={currentSquares} onPlay={handlePlay} xIsNext={xIsNext} />
+        <Board squares={currentSquares} onPlay={handlePlay} xIsNext={xIsNext} winner={winner} />
       </div>
       <div className="w-60 flex flex-col gap-2">
         <p className="mb-2 font-semibold text-foreground">
@@ -70,6 +79,13 @@ export default function Game() {
         </p>
         <ol className="flex flex-col gap-1">{moves}</ol>
       </div>
+
+      <WinnerDialog
+        isOpen={showWinnerDialog}
+        winner={winner}
+        onClose={() => setShowWinnerDialog(false)}
+        onNewGame={resetGame}
+      />
     </div>
   );
 }
