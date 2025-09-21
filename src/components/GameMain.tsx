@@ -14,14 +14,12 @@ export default function Game() {
   const currentSquares = history[currentMove];
   const winner = calculateWinner(currentSquares);
 
-  // Reset game function
   const resetGame = () => {
     setHistory([Array(9).fill(null)]);
     setCurrentMove(0);
     setShowWinnerDialog(false);
   };
 
-  // Expose reset function globally for sidebar access
   if (typeof window !== 'undefined') {
     (window as any).resetGame = resetGame;
   }
@@ -69,15 +67,18 @@ export default function Game() {
   });
 
   return (
-    <div className="flex flex-col sm:flex-row gap-8 p-4 sm:p-8">
-      <div className="border border-border flex items-center justify-center p-4 bg-background">
+    <div className="flex flex-col sm:flex-row gap-4 p-4 sm:p-8">
+      <div className="border border-border flex items-center justify-center p-2 sm:p-4 bg-background">
         <Board squares={currentSquares} onPlay={handlePlay} xIsNext={xIsNext} winner={winner} />
       </div>
-      <div className="w-60 flex flex-col gap-2">
-        <p className="mb-2 font-semibold text-foreground">
+      
+      <div className="w-full sm:w-60 flex flex-col gap-2 mt-4 sm:mt-0">
+        <p className="mb-2 font-semibold text-foreground text-center sm:text-left">
           {winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`}
         </p>
-        <ol className="flex flex-col gap-1">{moves}</ol>
+        <ol className="flex flex-row flex-wrap gap-1 sm:flex-col sm:flex-nowrap max-h-32 sm:max-h-none overflow-y-auto">
+          {moves}
+        </ol>
       </div>
 
       <WinnerDialog
