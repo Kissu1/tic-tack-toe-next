@@ -12,3 +12,10 @@ export interface BoardProps {
   onPlay: (nextSquares: BoardState, moveIndex: number) => void;
   xIsNext: boolean;
 }
+
+export interface WinnerDialogProps {
+  isOpen: boolean;
+  winner: Player | null;
+  onClose: () => void;
+  onNewGame: () => void;
+}
